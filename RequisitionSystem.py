@@ -9,6 +9,51 @@ Due Time : 11:59 PM
 
 
 
+# Single Responsibility Principle (SRP)
+    # init > gathering requisition imforamtions
+    # add_or_remove_items > Uses for Items management
+    # evaluate_approval > Uses for approval process
+    # display_requisition > Print out requisition summary
+        # Why it matters? : If I need to change the item logic or approval system, I only update one method. This would help me keeping my code clean as easy to maintain
+
+# Modularity
+    # EG. add_or_remove_items & evalutate_approval > these codes split into distinct methods, each block is modular.
+        # Why it matters? : Modular code is easiest to test, reuse, and debug. I can reuse these functions in another system without rewriting
+
+# DRY (Don't Repeat Yourself)
+    # Instead of me repeating, I used loops and shared methods:
+        # I use one loop to handle both adding and removing items
+        # The requisition ID is Auto incremented with a counter
+        # Data is updated in on place
+            # Why it matters? : Implementing this reduces bugs and make updates much easier. Change one peice of logic, and it works all around
+
+# Encapsulation 
+    # I used a class *RequisitionSystem* to group data and what happens:
+        # Variables like self.items, self.total, and self.status are protected inside the object
+        # the class also stores all requisition using *RequisitionSystem* more reliable and secure
+
+# Maintainability
+    # I used variables which have clear and straight foward names eg. staff_name, approval_refrence, and requisition_id) and my code flow is quit logical
+        # I used:
+            # .title to format names
+            # try/except to validate user's input
+            # class level list to keep track of all the requisition
+        # Why it matters? : In the future if i'm willing to collab or get help from other developer, they can easily read, understand, and edit/improves my code
+
+# Readability
+    # I used :
+        # Clear mothod and variable names
+        # Spaced out code with comments 
+        # Logical prompt
+        # Why it matters? : Readible code is obvoiusly easier to look at, debug, and extend this would help me alot for training to become a professional development
+
+# Error handling
+    # from : try:
+    #            price = float(input(f"Cost of {item}:$ "))
+    # this catches most invalid inputs so that my program doesn't crash easily
+        # Why it matters? : Good programs should be able to hand mistakes properly
+
+
 
 #   Import RegEx
 #   for staff ID validation
@@ -29,8 +74,9 @@ class RequisitionSystem:
     
     requisition_counter = 10000
     requisitions = []
-
+    
 #   requisition system
+    # SRP v
     def __init__(self, date, staff_id, staff_name):
         self.date = date
         self.staff_id = staff_id
@@ -46,6 +92,7 @@ class RequisitionSystem:
 #   start of requisiton system, for approval
 #   changed this from my part A now you're able to add and remove items from the requisition
 #   also
+    # SRP v
     def add_or_remove_items(self):
         
         self.current_items = 0
@@ -99,7 +146,7 @@ class RequisitionSystem:
                 break
             else:
                 print("Invalid option. Type 'add', 'remove', or 'done'.")
-                
+    # SRP v     
     def evaluate_approval(self):
         if self.total < 500:
             self.status = "Approved"
@@ -124,6 +171,7 @@ class RequisitionSystem:
                 
 #   display requisition
 #   also imported most of display print features from my Part A code
+    # SRP v
     def display_requisition(self):
         print("\nPrinting Requisition:")
         print(f"Date: {self.date}")
